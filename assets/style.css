@@ -1,0 +1,12 @@
+.welcome {
+    margin: auto;
+    width: 100%;
+    height: 250px;
+    text-align: center;
+    justify-content: center;
+    padding-top: 17%;
+}
+
+.button {
+    text-align: center;
+}
