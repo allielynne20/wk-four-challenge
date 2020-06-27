@@ -1,9 +1,12 @@
 //API Quiz 
 
-startButtonEl = document.querySelector("#start-button");
+var startButtonEl = document.querySelector("#start-button");
 startButtonEl.innerHTML = "Start Quiz";
 //nextButtonEl = document.querySelector("#next-button");
-questionEl = document.getElementById('welcome');
+var questionEl = document.getElementById('questions');
+var currentQuestionIndex = 0;
+var choicesEl = document.getElementById('Choices');
+var confirmAnswer = document.getElementById('confirm');
 
 //Array of 7 questions for my quiz
 questionArray = [
@@ -27,26 +30,48 @@ answerArray = [
 ];
 
 //getQuestion function() that displays the array items in the quiz-container
-function getQuestions() {
-    for (i = 0; i <= questionArray.length; i++) {
-        questionEl.innerHTML = (questionArray[i]);
-        //Object.values(questionArray[i]);
-        console.log(event.target.questionEl);
-        //console.log(questionEl);
-        //return (questionArray[i].question);
-        if (questionArray[i], i++) {
-            //continue;
-            console.log(questionArray[i]);
-        }
-        // else {
-        //     return -1;
-        // }
+// function getQuestions() {
+//     for (i = 0; i <= questionArray.length; i++) {
+//         questionEl.innerHTML = (questionArray[i]);
+//         //Object.values(questionArray[i]);
+//         console.log(event.target.questionEl);
+//         //console.log(questionEl);
+//         //return (questionArray[i].question);
+//         if (questionArray[i], i++) {
+//             //continue;
+//             console.log(questionArray[i]);
+//         }
+//         // else {
+//         //     return -1;
+//         // }
 
-    };
+//     };
 
-};
+// };
 
-startButtonEl.innerHTML = "Next";
+
+function startQuiz() {
+    var startScreen = document.getElementById('start-screen');
+    startScreen.setAttribute('class', 'hide');
+    questionEl.removeAttribute('class');
+    getQuestion();
+}
+
+function getQuestion() {
+    var currentQuestion = questions[currentQuestionIndex];
+    var title = document.getElementById('Question-title');
+    title.textContent = currentQuestion.title;
+    choicesEl.innerHTML = "";
+    currentQuestion.choices.forEach(function (choice, i) {
+        var button = document.createElement('button');
+        button.setAttribute('class', 'choice');
+        button.setAttribute('value', choice);
+        button.textContent = i + 1 + '. ' + choice; 
+        button.onclick = checkAnswer;
+        choicesEl.appendChild(button);
+    })
+}
+
 
 
 
@@ -56,18 +81,28 @@ var score = 0;
 
 
 //check the answer of the question
-checkAnswer = function () {
-    //console.log(event);
-    var correctAnswer = questionArray[i].correctAnswer;
+var checkAnswer = function () {
 
-    if (correctAnswer) {
-        return correctAnswer
+    if (this.value !== questions[currentQuestionIndex].answer) {
+        confirmAnswer.textContent = "Wrong!";
     }
     else {
-        return "Wrong!"
+        confirmAnswer.textContent = "Correct!";
         //subtract 10 seconds from the timer 
     }
-};
+    currentQuestionIndex++;
+    if (currentQuestionIndex === questions.length) {
+        //call function for quiz end 
+        console.log("test");
+    }
+    else {
+        getQuestion();
+    }
+}
+
+function endQuiz () {
+    
+}
 
 //start the loop through the array of questions, the timer, and end the timer when the loop is finished or the time reaches 0 
 // startGame = function () {
@@ -110,5 +145,5 @@ checkAnswer = function () {
 
 
 //add event listeners for button clicks 
-startButtonEl.addEventListener("click", getQuestions);
+startButtonEl.addEventListener("click", startQuiz);
 

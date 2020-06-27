@@ -16,7 +16,7 @@
 
     <main id="quiz-container">
         <!--Container that holds Welcome-->
-        <div class="welcome">
+        <div class="welcome" id="start-screen">
             <div id="welcome">
                 <p>
                 <h1>Welcome to the coding quiz challenge!</h1>You will have __ seconds to take the quiz! Be careful, if
@@ -29,20 +29,25 @@
                 <!--Start quiz button-->
                 <button id="start-button"></button>
             </div>
+        </div>
 
-            <!-- <div class="next-button">
-                <button id="next-button"></button>
-            </div> -->
+
+        <section class="hide" id="questions">
+            <h2 id="Question-title"></h2>
+            <div id="Choices"></div>
+            <div id="confirm"></div>
+        </section>
+            
+        <section>
+            <h2 id=""></h2>
+        </section>
+
 
     </main>
 
 
-    <!-- <section class="quiz-container">
-        <!--Holds the questions-->
-    <!-- <p id="quiz-container"></p>
-    </section> -->
 
-
+    <script src="./assets/questions.js"></script>
     <script src="./assets/script.js"></script>
 
 
